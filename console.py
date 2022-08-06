@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_quit(self):
         """ Print help for the quit command """
-        print("Quit command to exit the program\n")
+        print("Exits the program\n")
 
     def do_EOF(self, arg):     
         """ Exits the program """
@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_EOF(self):
         """ Print help for the EOF command """
-        print("EOF command to exit the program\n")
+        print("Exits the program\n")
 
     def emptyline(self):
         """ Does nothing when empty line + ENTER is executed """
@@ -89,12 +89,13 @@ class HBNBCommand(cmd.Cmd):
         """
         print("""
         Creates a new instance of the class passed as the
-        1st argument, saves it (to the JSON file) and prints the id
-        Ex: $ create BaseModel 1234-1234-1234""")
+        argument, saves it and prints its id
+        Ex: $ create BaseModel""")
 
     def do_show(self, arg):
         """ Prints the string representation of an instance based
-        on the class name and id. Ex: $ show BaseModel 1234-1234-1234 """
+        on the class name and id.
+        Ex: $ show BaseModel 1234-1234-1234 """
         arg_list = HBNBCommand.cmd_parse(arg)
         db = storage.all()
 
@@ -114,8 +115,8 @@ class HBNBCommand(cmd.Cmd):
         Print help for the show command
         """
         print("""
-        Prints the string representation of an
-        instance based on the class name and id
+        Prints the string representation of an instance
+        based on the class name and id
         Ex: $ show BaseModel 1234-1234-1234""")
 
     def do_destroy(self, arg):
@@ -142,13 +143,15 @@ class HBNBCommand(cmd.Cmd):
         """ Print help for the destroy command """
         print("""
         Deletes an instance based on the class name and id
-        (save the change into the JSON file).
         Ex: $ destroy BaseModel 1234-1234-1234
         """)
 
     def do_all(self, arg):
-        """ Prints all string representations of all the instances based or not on the class name
-        Ex: $ all BaseModel or $ all"""
+        """ Prints all string representations of all the instances
+        based on or not on the class name
+        Ex: $ all BaseModel
+          : $ all
+        """
         arg_list = HBNBCommand.cmd_parse(arg)
 
         if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__class_list.keys():
@@ -165,8 +168,10 @@ class HBNBCommand(cmd.Cmd):
     def help_all(self):
         """ Print help for the all command """
         print("""
-        Prints all string representation of all instances
-        based or not on the class name. Ex: $ all BaseModel or $ all
+        Prints all string representations of all instances
+        based on or not on the class name.
+        Ex: $ all BaseModel
+          : $ all
         """)
 
     def do_update(self, arg):
@@ -224,14 +229,14 @@ class HBNBCommand(cmd.Cmd):
         """ Print help for the update command """
         print("""
         Updates an instance based on the class name and id by
-        adding or updating attribute (save the change into the JSON file).
+        adding or updating attribute.
         Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
         """)
 
     def do_count(self, arg):
         """
-            Prnits the number of elements inside the FileStorage that
-            are of instances of cls
+            Prints the number of elements inside the FileStorage that
+            are instances of cls
         """
         arg_list = HBNBCommand.cmd_parse(arg)
         if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__class_list:
@@ -247,8 +252,8 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """
-            Handles the case where the the command has no equivlaent
-            do_ method
+            Handles cases where the the command has no equivalent
+            do_method
         """
 
         line_p = HBNBCommand.cmd_parse(line, '.')
