@@ -1,6 +1,6 @@
 # AirBnB clone - The Console
 
-![hbnb-screenshot](https://github.com/akakiplimo/AirBnB_clone/tree/main/img/hbnb_screenshot.png)
+![logo](https://github.com/akakiplimo/AirBnB_clone/tree/main/img/hbnb_logo.png)
 
 ## Description
 This is an AirBnB clone project that allows users to search for a place to stay in a location of their choice and book it for whatever period of time as per the agreement with the owner of the stay.
