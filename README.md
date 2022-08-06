@@ -3,8 +3,8 @@
 ![logo](./img/hbnb_screenshot.png)
 
 ## Description
-This is an AirBnB clone project that allows users to search for a place to stay in a location of their choice and book it for whatever period of time as per the agreement with the owner of the stay.
-This team project is the first step towards building a first full web application.
+> This is an AirBnB clone project that allows users to search for a place to stay in a location of their choice and book it for whatever period of time as per the agreement with the owner of the stay.
+> This team project is the first step towards building a first full web application.
 It consists of a custom command-line interface(console) and the base classes for data storage.
 
 `console` capabilities:
