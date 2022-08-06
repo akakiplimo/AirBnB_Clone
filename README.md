@@ -1,4 +1,6 @@
-# AirBnB_clone
+# AirBnB clone - The Console
+
+
 > This is an AirBnB clone project that allows users to search for a place to stay in a location of their choice and book it for whatever period of time as per the agreement with the owner of the stay.
 
 ## Description
