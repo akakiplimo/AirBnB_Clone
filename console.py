@@ -58,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
         print("EOF command to exit the program\n")
 
     def emptyline(self):
-        """ does nothing when an empty line + ENTER are executed """
+        """ Does nothing when empty line + ENTER is executed """
         pass
 
     def do_create(self, arg):
@@ -227,12 +227,6 @@ class HBNBCommand(cmd.Cmd):
         adding or updating attribute (save the change into the JSON file).
         Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
         """)
-    def emptyline(self):
-        """
-            Does nothing if Empty line + enter is inserted.
-            Used for overriding the emptyline function
-        """
-        pass
 
     def do_count(self, arg):
         """
