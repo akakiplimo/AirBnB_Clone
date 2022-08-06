@@ -3,8 +3,9 @@
 ![logo](./img/hbnb_screenshot.png)
 
 ## Description
-> This is an AirBnB clone project that allows users to search for a place to stay in a location of their choice and book it for whatever period of time as per the agreement with the owner of the stay.
-> This team project is the first step towards building a first full web application.
+This is an AirBnB clone project that allows users to search for a place to stay in a location of their choice and book it for whatever period of time as per the agreement with the owner of the stay.
+
+This team project is the first step towards building a first full web application.
 It consists of a custom command-line interface(console) and the base classes for data storage.
 
 `console` capabilities:
@@ -86,7 +87,9 @@ File | Description | Attributes
 Data serialization and deserialization is done using JSON format. This is handled by [engine](./models/engine/)
 
 The [FileStorage](./models/engine/file_storage.py) class has methods enabling it to follow this flow:
+
 ```<object> -> to_dict() -> <dictionary> -> JSON dump -> <json string> -> FILE -> <json string> -> JSON load -> <dictionary> -> <object>```
+
 The [__init__.py](./models/__init__.py) file contains an instantiation of the FileStorage class called **storage**, followed by a call to the method reload() on that instance allowing storage to be reloaded automatically at initialization, which recovers the serialized data.
 
 ## Tests
