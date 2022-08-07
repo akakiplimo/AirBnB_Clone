@@ -160,7 +160,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 for key, obj in storage.all().items():
-                    if type(obj).__name__ == arglist[0]:
+                    if type(obj).__name__ == arg_list[0]:
                         obj_list.append(obj.__str__())
                 print(obj_list)
         else:
@@ -281,11 +281,11 @@ class HBNBCommand(cmd.Cmd):
                 self.do_all(args[0])
             elif args[1] == "count()":
                 self.do_count(args[0])
-            elif args[1] == "show()":
+            elif args[1][:4] == "show":
                 self.do_show(self.parse(args))
-            elif args[1] == "destroy()":
+            elif args[1][:7] == "destroy":
                 self.do_destroy(self.parse(args))
-            elif args[1] == "update()":
+            elif args[1][:6] == "update()":
                 arg = self.parse(args)
                 if isinstance(arg, list):
                     obj = models.storage.all()
