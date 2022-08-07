@@ -7,7 +7,7 @@ import time
 import unittest
 from models import storage
 from datetime import datetime
-from models.base_model.BaseModel import BaseModel
+from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
