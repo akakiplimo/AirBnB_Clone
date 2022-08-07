@@ -90,23 +90,22 @@ class HBNBCommand(cmd.Cmd):
         """ Prints the string representation of an instance based
         on the class name and id.
         """
-        arg_list = arg.split(' ')
         db = storage.all()
 
-        if arg_list == []:
+        if arg == "" or arg is None:
             print("** class name missing **")
-        elif arg_list[0] not in storage.classes():
-            print("** class doesn't exist **")
-        elif len(arg_list) == 1:
-            print("** instance id missing **")
         else:
-            storage.reload()
-            for key, obj in db.items():
-                if obj.id == arg_list[1] and obj.__class__.__name__ ==\
-                            arg_list[0]:
-                    print(obj.__str__())
-                    return
-            print("** no instance found **")
+            arg_list = arg.split(' ')
+            if arg_list[0] not in storage.classes():
+                print("** class doesn't exist **")
+            elif len(arg_list) == 1:
+                print("** instance id missing **")
+            else:
+                key = "{}.{}".format(arg_list[0], arg_list[1])
+                if key not in db:
+                    print("** no instance found **")
+                else:
+                    print(db[key])
 
     def help_show(self):
         """
