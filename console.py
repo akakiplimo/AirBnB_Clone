@@ -182,29 +182,29 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
 
-        if arg_list[0] not in HBNBCommand.__class_list:
+        elif arg_list[0] not in HBNBCommand.__class_list:
             print("** class doesn't exist **")
             return False
 
-        if len(arg_list) == 1:
+        elif len(arg_list) == 1:
             print("** instance id missing **")
             return False
 
-        if "{}.{}".format(arg_list[0], arg_list[1]) not in obj_dict.keys():
+        elif "{}.{}".format(arg_list[0], arg_list[1]) not in obj_dict.keys():
             print("** no instance found **")
             return False
 
-        if len(arg_list) == 2:
+        elif len(arg_list) == 2:
             print("** attribute name missing **")
 
-        if len(arg_list) == 3:
+        elif len(arg_list) == 3:
             try:
                 type(eval(arg_list[2])) != dict
             except NameError:
                 print("** value missing **")
                 return False
 
-        if len(arg_list) == 4:
+        elif len(arg_list) == 4:
             obj = obj_dict["{}.{}".format(arg_list[0], arg_list[1])]
             if arg_list[2] in obj.__class__.__dict__.keys():
                 valtype = type(obj.__class__.__dict__[arg_list[2]])
