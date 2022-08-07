@@ -1,32 +1,50 @@
 #!/usr/bin/python3
-""" module that defines a class FileStorage for AirBnB clone """
+""" File Storage module to serialize instances to a JSON file
+and deserialize JSON file to instances
+"""
+
+
 import json
 from os.path import exists
 
 
 class FileStorage:
-    """ class that serializes and deserializes between JSON file and instances """
+    """ Serializes instances to a JSON file and
+    deserializes JSON file to instances.
+    Attr:
+        file_path: (private) string - Path to the JSON file
+        objects: (private) dictionary - Stores all objects by <class name>.id
+
+    Methods:
+        all(): returns the dictionary __objects
+        new(): sets in __objects the obj with key <obj class name>.id
+        save(): serializes __objects to the JSON file
+        reload(): deserializes the JSON file to __objects
+    """
     __file_path = "file.json"
     __objects = dict()
 
     def all(self):
-        """ returns the dictionary __objects """
-        return self.__objects
+        """ Returns the dictionary __objects """
+        return FileStorage.__objects
 
     def new(self, obj):
-        """ sets in __objects the obj with key <obj class name>.id """
-        self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
+        """ Sets in __objects the obj with key <obj class name>.id """
+        FileStorage.__objects[obj.__class__.__name__ + "." + obj.id] = obj
 
     def save(self):
-        """ serializes __objects to the JSON file (path: __file_path) """
+        """ Deserializes the JSON file to __objects
+        (only if the JSON file (__file_path) exists,
+        If the file doesn’t exist, no exception is raised)
+        """
         temp = dict()
-        for key in self.__objects.keys():
-            temp[key] = self.__objects[key].to_dict()
-        with open(self.__file_path, mode="w") as jsonFile:
-            json.dump(temp, jsonFile)
+        for key in FileStorage.__objects.keys():
+            temp[key] = FileStorage.__objects[key].to_dict()
+        with open(FileStorage.__file_path, mode="w", encoding='utf-8') as Fil:
+            json.dump(temp, Fil)
 
     def reload(self):
-        """ deserializes the JSON file to __objects """
+        """ Deserializes the JSON file to __objects """
         from ..base_model import BaseModel
         from ..user import User
         from ..state import State
@@ -35,21 +53,40 @@ class FileStorage:
         from ..place import Place
         from ..review import Review
 
-        if exists(self.__file_path):
-            with open(self.__file_path) as jsonFile:
+        if exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path) as jsonFile:
                 deserialize = json.load(jsonFile)
             for key in deserialize.keys():
                 if deserialize[key]['__class__'] == "BaseModel":
-                    self.__objects[key] = BaseModel(**deserialize[key])
+                    FileStorage.__objects[key] = BaseModel(**deserialize[key])
                 elif deserialize[key]['__class__'] == "User":
-                    self.__objects[key] = User(**deserialize[key])
+                    FileStorage.__objects[key] = User(**deserialize[key])
                 elif deserialize[key]['__class__'] == "State":
-                    self.__objects[key] = State(**deserialize[key])
+                    FileStorage.__objects[key] = State(**deserialize[key])
                 elif deserialize[key]['__class__'] == "City":
-                    self.__objects[key] = City(**deserialize[key])
+                    FileStorage.__objects[key] = City(**deserialize[key])
                 elif deserialize[key]['__class__'] == "Amenity":
-                    self.__objects[key] = Amenity(**deserialize[key])
+                    FileStorage.__objects[key] = Amenity(**deserialize[key])
                 elif deserialize[key]['__class__'] == "Place":
-                    self.__objects[key] = Place(**deserialize[key])
+                    FileStorage.__objects[key] = Place(**deserialize[key])
                 elif deserialize[key]['__class__'] == "Review":
-                    self.__objects[key] = Review(**deserialize[key])
+                    FileStorage.__objects[key] = Review(**deserialize[key])
+
+    def classes(self):
+        """ Returns a dictionary of valid classes and their references. """
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+
+        classes = {"BaseModel": BaseModel,
+                   "User": User,
+                   "State": State,
+                   "City": City,
+                   "Amenity": Amenity,
+                   "Place": Place,
+                   "Review": Review}
+        return classes
