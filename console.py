@@ -119,23 +119,23 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """ Deletes an instance based on the class name and id """
-        arg_list = arg.split(' ')
-        storage.reload()
         db = storage.all()
 
-        if arg_list == []:
+        if arg == "" or arg is None:
             print("** class name missing **")
-        elif arg_list[0] not in storage.classes():
-            print("** class doesn't exist **".format(arg_list[0]))
-        elif len(arg_list) == 1:
-            print("** instance id missing **")
         else:
-            key = "{}.{}".format(arg_list[0], arg_list[1])
-            if key not in db:
-                print("** no instance found **")
+            arg_list = arg.split(' ')
+            if arg_list[0] not in storage.classes():
+                print("** class doesn't exist **")
+            elif len(arg_list) == 1:
+                print("** instance id missing **")
             else:
-                del db[key]
-                storage.save()
+                key = "{}.{}".format(arg_list[0], arg_list[1])
+                if key not in db:
+                    print("** no instance found **")
+                else:
+                    del db[key]
+                    storage.save()
 
     def help_destroy(self):
         """ Print help for the destroy command """
