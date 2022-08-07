@@ -101,13 +101,9 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             storage.reload()
-            #key = "{}.{}".format(arg_list[0], arg_list[1])
-            #if key not in db:
-            #    print("** no instance found **")
-            #else:
-            #    print(db[key])
             for key, obj in db.items():
-                if obj.id == arg_list[1] and obj.__class__.__name__ == arg_list[0]:
+                if obj.id == arg_list[1] and obj.__class__.__name__ ==\
+                            arg_list[0]:
                     print(obj.__str__())
                     return
             print("** no instance found **")
@@ -165,7 +161,7 @@ class HBNBCommand(cmd.Cmd):
                 print(obj_list)
         else:
             for key, obj in storage.all().items():
-                    obj_list.append(obj.__str__())
+                obj_list.append(obj.__str__())
             print(obj_list)
 
     def help_all(self):
@@ -285,7 +281,7 @@ class HBNBCommand(cmd.Cmd):
                 self.do_show(self.parse(args))
             elif args[1][:7] == "destroy":
                 self.do_destroy(self.parse(args))
-            elif args[1][:6] == "update()":
+            elif args[1][:6] == "update":
                 arg = self.parse(args)
                 if isinstance(arg, list):
                     obj = models.storage.all()
