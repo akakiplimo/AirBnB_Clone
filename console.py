@@ -160,7 +160,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 for key, obj in storage.all().items():
-                    if type(obj).__name__ == arglist[0]:
+                    if type(obj).__name__ == arg_list[0]:
                         obj_list.append(obj.__str__())
                 print(obj_list)
         else:
