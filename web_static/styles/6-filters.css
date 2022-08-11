@@ -1,0 +1,93 @@
+/* for filters style */
+.filters {
+    background-color: white;
+    height: 70px;
+    width: 100%;
+    border: 1px #DDDDDD solid;
+    border-radius: 4px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+section.filters > button {
+    font-size: 18px;
+    background-color: #FF5A5F;
+    color: #FFFFFF;
+    height: 48px;
+    width: 20%;
+    border: 0px;
+    border-radius: 4px;
+    margin: auto;
+    margin-right: 30px;
+    opacity: 1;
+}
+
+section.filters > button:hover {
+    opacity: 0.9;
+}
+
+.locations, .amenities {
+    height: 100%;
+    width: 25%;
+    padding-left: 50px;
+}
+
+.locations {
+    border-right: #DDDDDD 1px solid;
+}
+
+.locations > h3, .amenities > h3 {
+    font-weight: 600;
+    margin: 12px 0 5px 0;
+}
+
+.locations > h4, .amenities > h4 {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+
+.popover {
+    display: none;
+    position: relative;
+    background-color: #FAFAFA;
+    width: 100%;
+    border: #DDDDDD 1px solid;
+    border-radius: 4px;
+    left: -51px;
+    margin-top: 17px;
+    z-index: 1;
+    padding: 30px 50px 30px 0;
+}
+
+.amenities:hover > .popover, .locations:hover > .popover {
+    display: block;
+}
+
+.popover, .popover > ul, li > ul{
+    list-style-type: none;
+}
+
+.popover h2 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.locations > .popover > li {
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+.locations > .popover > li > ul{
+    padding-left: 20px;
+}
+
+.locations > .popover > li > ul > li{
+    margin-bottom: 8px;
+}
+
+.amenities > .popover > li {
+    margin-left: 50px;
+    margin-bottom: 8px;
+}
