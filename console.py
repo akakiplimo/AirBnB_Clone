@@ -90,27 +90,22 @@ class HBNBCommand(cmd.Cmd):
         """ Prints the string representation of an instance based
         on the class name and id.
         """
-        arg_list = arg.split(' ')
         db = storage.all()
 
-        if arg_list == []:
+        if arg == "" or arg is None:
             print("** class name missing **")
-        elif arg_list[0] not in storage.classes():
-            print("** class doesn't exist **")
-        elif len(arg_list) == 1:
-            print("** instance id missing **")
         else:
-            storage.reload()
-            #key = "{}.{}".format(arg_list[0], arg_list[1])
-            #if key not in db:
-            #    print("** no instance found **")
-            #else:
-            #    print(db[key])
-            for key, obj in db.items():
-                if obj.id == arg_list[1] and obj.__class__.__name__ == arg_list[0]:
-                    print(obj.__str__())
-                    return
-            print("** no instance found **")
+            arg_list = arg.split(' ')
+            if arg_list[0] not in storage.classes():
+                print("** class doesn't exist **")
+            elif len(arg_list) == 1:
+                print("** instance id missing **")
+            else:
+                key = "{}.{}".format(arg_list[0], arg_list[1])
+                if key not in db:
+                    print("** no instance found **")
+                else:
+                    print(db[key])
 
     def help_show(self):
         """
@@ -123,23 +118,23 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """ Deletes an instance based on the class name and id """
-        arg_list = arg.split(' ')
-        storage.reload()
         db = storage.all()
 
-        if arg_list == []:
+        if arg == "" or arg is None:
             print("** class name missing **")
-        elif arg_list[0] not in storage.classes():
-            print("** class doesn't exist **".format(arg_list[0]))
-        elif len(arg_list) == 1:
-            print("** instance id missing **")
         else:
-            key = "{}.{}".format(arg_list[0], arg_list[1])
-            if key not in db:
-                print("** no instance found **")
+            arg_list = arg.split(' ')
+            if arg_list[0] not in storage.classes():
+                print("** class doesn't exist **")
+            elif len(arg_list) == 1:
+                print("** instance id missing **")
             else:
-                del db[key]
-                storage.save()
+                key = "{}.{}".format(arg_list[0], arg_list[1])
+                if key not in db:
+                    print("** no instance found **")
+                else:
+                    del db[key]
+                    storage.save()
 
     def help_destroy(self):
         """ Print help for the destroy command """
@@ -165,7 +160,7 @@ class HBNBCommand(cmd.Cmd):
                 print(obj_list)
         else:
             for key, obj in storage.all().items():
-                    obj_list.append(obj.__str__())
+                obj_list.append(obj.__str__())
             print(obj_list)
 
     def help_all(self):
@@ -187,29 +182,29 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
 
-        if arg_list[0] not in HBNBCommand.__class_list:
+        elif arg_list[0] not in HBNBCommand.__class_list:
             print("** class doesn't exist **")
             return False
 
-        if len(arg_list) == 1:
+        elif len(arg_list) == 1:
             print("** instance id missing **")
             return False
 
-        if "{}.{}".format(arg_list[0], arg_list[1]) not in obj_dict.keys():
+        elif "{}.{}".format(arg_list[0], arg_list[1]) not in obj_dict.keys():
             print("** no instance found **")
             return False
 
-        if len(arg_list) == 2:
+        elif len(arg_list) == 2:
             print("** attribute name missing **")
 
-        if len(arg_list) == 3:
+        elif len(arg_list) == 3:
             try:
                 type(eval(arg_list[2])) != dict
             except NameError:
                 print("** value missing **")
                 return False
 
-        if len(arg_list) == 4:
+        elif len(arg_list) == 4:
             obj = obj_dict["{}.{}".format(arg_list[0], arg_list[1])]
             if arg_list[2] in obj.__class__.__dict__.keys():
                 valtype = type(obj.__class__.__dict__[arg_list[2]])
@@ -281,11 +276,11 @@ class HBNBCommand(cmd.Cmd):
                 self.do_all(args[0])
             elif args[1] == "count()":
                 self.do_count(args[0])
-            elif args[1] == "show()":
+            elif args[1][:4] == "show":
                 self.do_show(self.parse(args))
-            elif args[1] == "destroy()":
+            elif args[1][:7] == "destroy":
                 self.do_destroy(self.parse(args))
-            elif args[1] == "update()":
+            elif args[1][:6] == "update":
                 arg = self.parse(args)
                 if isinstance(arg, list):
                     obj = models.storage.all()
